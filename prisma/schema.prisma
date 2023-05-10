@@ -11,11 +11,12 @@ datasource db {
 }
 
 model Question {
-    id       String   @id @default(cuid())
+    id       String  @id @default(cuid())
     question String
-    Form     Form?    @relation(fields: [formId], references: [id])
+    Form     Form?   @relation(fields: [formId], references: [id])
     formId   String?
-    Answer   Answer[]
+
+    Answer Answer[]
 }
 
 model Answer {
@@ -30,19 +31,22 @@ model Answer {
 }
 
 model Form {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime
+    id        String    @id @default(cuid())
+    createdAt DateTime? @default(now())
+    updatedAt DateTime?
 
     title       String
-    description String
-    thumbnail   String
+    description String?
+    thumbnail   String?
+    slug        String  @unique
 
     questions Question[]
 
-    owner       Company       @relation(fields: [companyId], references: [id])
-    companyId   String
+    // owner       Company       @relation(fields: [companyId], references: [id])
+    // companyId   String
     Submissions Submissions[]
+    User        User?         @relation(fields: [userId], references: [id])
+    userId      String?
 }
 
 model Submissions {
@@ -53,23 +57,28 @@ model Submissions {
     answers   Answer[]
 }
 
-model Company {
-    id              String   @id @default(cuid())
-    createdAt       DateTime @default(now())
-    email           String   @unique
-    isEmailVerified Boolean  @default(false)
-    name            String
-    location        String?
-    employees       User[]
-    Form            Form[]
-}
+// model Company {
+//     id              String   @id @default(cuid())
+//     createdAt       DateTime @default(now())
+//     email           String   @unique
+//     isEmailVerified Boolean  @default(false)
+//     name            String
+//     location        String?
+//     employees       User[]
+//     Form            Form[]
+// }
 
 model User {
-    id              String   @id @default(cuid())
-    createdAt       DateTime @default(now())
-    email           String   @unique
-    isEmailVerified Boolean  @default(false)
+    id              String    @id @default(cuid())
+    createdAt       DateTime? @default(now())
     name            String
-    Company         Company? @relation(fields: [companyId], references: [id])
-    companyId       String?
+    email           String    @unique
+    password        String
+    isEmailVerified Boolean?  @default(false)
+    forms           Form[]
+    username        String    @unique
+    // Company         Company?  @relation(fields: [companyId], references: [id])
+    // companyId       String?
+
+    @@index([username])
 }

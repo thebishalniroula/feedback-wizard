@@ -5,12 +5,42 @@ import '~/styles/globals.css'
 import { type AppProps } from 'next/app'
 import { type Session } from 'next-auth'
 
+import { createTheme, NextUIProvider } from '@nextui-org/react'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import { Layout } from '../components/layout/layout'
+
+const lightTheme = createTheme({
+  type: 'light',
+  theme: {
+    colors: {},
+  },
+})
+
+const darkTheme = createTheme({
+  type: 'dark',
+  theme: {
+    colors: {},
+  },
+})
+
 const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) => {
   return (
     <SessionProvider session={session}>
-      <main className='dark:bg-gray-800 dark:text-gray-100 min-h-screen'>
-        <Component {...pageProps} />
-      </main>
+      <NextThemesProvider
+        defaultTheme='system'
+        attribute='class'
+        value={{
+          light: lightTheme.className,
+          dark: darkTheme.className,
+        }}
+      >
+        <NextUIProvider>
+          <Layout>
+            {' '}
+            <Component {...pageProps} />
+          </Layout>
+        </NextUIProvider>
+      </NextThemesProvider>{' '}
     </SessionProvider>
   )
 }

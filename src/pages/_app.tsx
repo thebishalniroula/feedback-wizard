@@ -7,11 +7,11 @@ import { type Session } from 'next-auth'
 
 const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) => {
   return (
-    <main className='dark:bg-gray-800 dark:text-gray-100 min-h-screen'>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <main className='dark:bg-gray-800 dark:text-gray-100 min-h-screen'>
         <Component {...pageProps} />
-      </SessionProvider>
-    </main>
+      </main>
+    </SessionProvider>
   )
 }
 

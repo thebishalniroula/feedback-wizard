@@ -25,7 +25,7 @@ export const formRouter = createTRPCRouter({
           description,
           thumbnail,
           slug: title.replace(' ', '-'),
-          userId: 'clheecnpp0000hppg7wu6prep',
+          userId: 'clhhydxcn0002hplsl5uwxl45',
           questions: {
             createMany: {
               data: questionsData,
@@ -34,11 +34,23 @@ export const formRouter = createTRPCRouter({
         },
       })
     }),
-  getAllByUser: protectedProcedure.query(({ ctx, input }) => {
+
+  getAllByUser: publicProcedure.query(({ ctx, input }) => {
     return ctx.prisma.form.findMany({
       where: {
         // TODO - replace with ctx.session.user.userId after implementing auth
-        userId: ctx.session.user.id,
+        userId: 'clhhydxcn0002hplsl5uwxl45',
+      },
+    })
+  }),
+
+  getById: publicProcedure.input(z.string()).query(({ ctx, input }) => {
+    return ctx.prisma.form.findFirst({
+      where: {
+        id: input,
+      },
+      include: {
+        questions: true,
       },
     })
   }),

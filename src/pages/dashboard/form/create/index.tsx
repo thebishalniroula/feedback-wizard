@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useState } from 'react'
 import { api } from '~/utils/api'
@@ -26,7 +27,12 @@ const MultiStepForm = () => {
   const handleBack = () => {
     setStep(step - 1)
   }
-  const { mutate, isLoading } = api.form.create.useMutation()
+  const router = useRouter()
+  const { mutate, isLoading } = api.form.create.useMutation({
+    onSuccess: () => {
+      router.replace('/dashboard/form/create/success')
+    },
+  })
   const handleSubmit = () => {
     mutate({ title, description, questions })
   }
@@ -134,7 +140,7 @@ const Step2 = ({
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuestions((prev) => {
-      prev[parseInt(e.target.getAttribute('data-q-number') as unknown as string)] += e.target.value
+      prev[parseInt(e.target.getAttribute('data-q-number') as unknown as string)] = e.target.value
 
       return prev
     })

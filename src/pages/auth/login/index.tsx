@@ -15,7 +15,12 @@ const index = () => {
   } = useForm<UserWithConfirmPassword>()
 
   const submitHandler = (data: UserWithConfirmPassword) => {
-    signIn('credentials', { callbackUrl: '/dashboard' })
+    signIn('credentials', {
+      redirect: true,
+      email: data.email,
+      password: data.password,
+      callbackUrl: '/dashboard',
+    })
   }
 
   return (

@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -6,15 +7,20 @@ import LastCard from '~/components/dashboard/LastCard'
 import { api } from '~/utils/api'
 // import Card from '~/components/Card'
 const index = () => {
+  const session = useSession()
+  console.log({ session })
   const { data: forms, isLoading } = api.form.getAllByUser.useQuery()
   if (isLoading) {
     return 'Loading...'
   }
+
+  console.log(forms)
+
   return (
     <div className='flex flex-wrap gap-4 min-h-screen p-5'>
       <LastCard />
       {forms?.map((form) => (
-        <Card key={form.id} title={form.title} image={form.thumbnail} description={form.description} />
+        <Card key={form.id} id={form.id} title={form.title} image={form.thumbnail} description={form.description} />
       ))}
     </div>
   )
@@ -22,12 +28,13 @@ const index = () => {
 
 export default index
 type CardProps = {
+  id: string
   image: string | null
   title: string
   description: string | null
 }
 
-const Card = ({ title, image, description }: CardProps) => {
+const Card = ({ id, title, image, description }: CardProps) => {
   return (
     <div className='flex flex-col gap-2 bg-slate-500 rounded-md w-48 h-80 justify-between'>
       <Image
@@ -45,7 +52,7 @@ const Card = ({ title, image, description }: CardProps) => {
           {description || 'This form does not have a description'}{' '}
         </p>
         <div className='flex justify-between'>
-          <Link href={''} className='p-2 bg-slate-400'>
+          <Link href={`/form/${id}`} className='p-2 bg-slate-400'>
             Preview
           </Link>
           <Link href={''} className='p-2 bg-blue-400'>

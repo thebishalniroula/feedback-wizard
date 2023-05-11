@@ -25,23 +25,22 @@ const darkTheme = createTheme({
 
 const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) => {
   return (
-    <SessionProvider session={session}>
-      <NextThemesProvider
-        defaultTheme='system'
-        attribute='class'
-        value={{
-          light: lightTheme.className,
-          dark: darkTheme.className,
-        }}
-      >
-        <NextUIProvider>
-          <Layout>
-            {' '}
+    <NextThemesProvider
+      defaultTheme='system'
+      attribute='class'
+      value={{
+        light: lightTheme.className,
+        dark: darkTheme.className,
+      }}
+    >
+      <NextUIProvider>
+        <Layout>
+          <SessionProvider session={session}>
             <Component {...pageProps} />
-          </Layout>
-        </NextUIProvider>
-      </NextThemesProvider>{' '}
-    </SessionProvider>
+          </SessionProvider>
+        </Layout>
+      </NextUIProvider>
+    </NextThemesProvider>
   )
 }
 

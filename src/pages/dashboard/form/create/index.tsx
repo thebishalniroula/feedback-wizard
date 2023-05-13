@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useState } from 'react'
+import { NextPageWithLayout } from '~/pages/_app'
 import { api } from '~/utils/api'
 
-const create = () => {
+const create: NextPageWithLayout = () => {
   return (
     <div className='flex justify-center'>
       <MultiStepForm />
@@ -11,6 +12,7 @@ const create = () => {
   )
 }
 
+create.hasLayout = true
 export default create
 
 const MultiStepForm = () => {
@@ -38,12 +40,12 @@ const MultiStepForm = () => {
   }
   return (
     <div className='flex items-center justify-center h-screen w-[30rem]'>
-      <div className='bg-white p-6 rounded-lg shadow-md w-full lg:max-w-xl text-gray-900'>
-        <h2 className='text-lg font-medium mb-4 text-teal-900'>Step {step} of 2</h2>
+      <div className='bg-[#1e1e1e] p-6 rounded-lg shadow-md w-full lg:max-w-xl text-gray-900'>
+        <h2 className='mb-4 text-slate-300 text-xl font-semibold'>Step {step} of 2</h2>
         <div className='flex mb-4'>
           <div
             className={`w-1/2 border-r border-gray-400  ${
-              step === 1 ? 'bg-blue-500 text-gray-900' : 'bg-gray-200'
+              step === 1 ? 'bg-slate-300 text-gray-900' : 'bg-slate-500'
             } p-2 text-center cursor-pointer`}
             onClick={() => setStep(1)}
           >
@@ -52,7 +54,7 @@ const MultiStepForm = () => {
           <button
             disabled={title === ''}
             className={`w-1/2 ${
-              step === 2 ? 'bg-blue-500 text-gray-900' : 'bg-gray-200'
+              step === 2 ? 'bg-slate-300 text-gray-900' : 'bg-slate-500'
             } p-2 text-center cursor-pointer`}
             onClick={() => title !== '' && setStep(2)}
           >
@@ -73,7 +75,7 @@ const MultiStepForm = () => {
           {step < 2 && (
             <button
               disabled={title === ''}
-              className='bg-blue-500 px-6 py-1.5 rounded-lg text-white hover:bg-blue-600'
+              className={`disabled:bg-gray-400 bg-white py-3 px-8 rounded-lg text-slate-800 cursor-pointer disabled:cursor-not-allowed`}
               onClick={(e) => title !== '' && handleNext()}
             >
               Next
@@ -97,29 +99,29 @@ const Step1 = ({
   setDesc: React.Dispatch<React.SetStateAction<string>>
 }) => (
   <div>
-    <h3 className='text-lg font-medium mb-4 text-slate-800'>Enter title and description of your form.</h3>
+    <h3 className='mb-4 text-lg text-gray-300'>Enter title and description of your form.</h3>
     <div className='mb-4'>
-      <label className='block font-medium mb-2 text-gray-700' htmlFor='name'>
+      <label className='block  mb-2 text-gray-200' htmlFor='name'>
         Title
       </label>
       <input
         type='text'
         id='name'
         name='name'
-        className='w-full border border-gray-400 p-2'
+        className='rounded-lg w-full border border-gray-500 px-4 py-2 bg-[#282727] text-gray-300'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
     </div>
     <div className='mb-4'>
-      <label className='block font-medium mb-2 text-gray-700' htmlFor='description'>
+      <label className='block  mb-2 text-gray-200' htmlFor='email'>
         Description
       </label>
       <input
         type='email'
         id='description'
         name='email'
-        className='w-full border border-gray-400 p-2'
+        className='rounded-lg w-full border border-gray-500 px-4 py-2 bg-[#282727] text-gray-300'
         value={desc}
         onChange={(e) => setDesc(e.target.value)}
       />
@@ -148,18 +150,16 @@ const Step2 = ({
 
   return (
     <div>
-      <h3 className='text-lg font-medium mb-4 text-slate-800'>Step 2</h3>
+      <h3 className='mb-4 text-lg text-gray-300'>Enter your questions.</h3>
       {questions.map((q, i) => (
         <div className='mb-4' key={i}>
-          <label className='block font-medium mb-2 text-gray-700' htmlFor='password'>
-            Question {i + 1}
-          </label>
+          <label className='block  mb-2 text-gray-200'>Question {i + 1}</label>
           <input
             data-q-number={i}
             type='text'
             id='password'
             name='password'
-            className='w-full border border-gray-400 p-2'
+            className='rounded-lg w-full border border-gray-500 px-4 py-2 bg-[#282727] text-gray-300'
             onChange={handleChange}
           />
         </div>
@@ -175,7 +175,10 @@ const Step2 = ({
           </svg>
           Add
         </button>
-        <button className='bg-blue-500 p-3 flex' onClick={submitHandler}>
+        <button
+          className={`disabled:bg-gray-400 bg-white py-3 px-8 rounded-lg text-slate-800 cursor-pointer disabled:cursor-not-allowed`}
+          onClick={submitHandler}
+        >
           {isLoading ? 'Submiting...' : 'submit'}
         </button>
       </div>

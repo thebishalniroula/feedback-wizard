@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
+import { NextPageWithLayout } from '~/pages/_app'
 
-const success = () => {
+const success: NextPageWithLayout = () => {
   return (
     <div className='relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-6 sm:py-12  bg-slate-800'>
       <div className='max-w-xl px-5 text-center'>
@@ -23,4 +24,5 @@ const success = () => {
   )
 }
 
+success.hasLayout = true
 export default success

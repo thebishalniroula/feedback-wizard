@@ -43,16 +43,17 @@ export const authOptions: NextAuthOptions = {
     }),
   },
 
-  adapter: PrismaAdapter(prisma),
-  session: { strategy: 'jwt' },
+  // adapter: PrismaAdapter(prisma),
+  // session: { strategy: 'jwt' },
+
   providers: [
-    // DiscordProvider({
-    //   clientId: '1103884792153509939',
-    //   clientSecret: 'q2TKV971L9Ow6ywZsCZ61lPoLDegeanF',
-    // }),
+    DiscordProvider({
+      clientId: '1103884792153509939',
+      clientSecret: 'X3LNurejXd8GfTLrB9W-ObE7B3D9sq9y',
+    }),
     Credentials({
       // The name to display on the sign in form (e.g. 'Sign in with...')
-      name: 'credentials',
+      name: 'Credentials',
       // The credentials is used to generate a suitable form on the sign in page.
       // You can specify whatever fields you are expecting to be submitted.
       // e.g. domain, username, password, 2FA token, etc.
@@ -61,7 +62,6 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'email', placeholder: 'jsmith@test.com' },
         password: { label: 'Password', type: 'password' },
       },
-
       async authorize(credentials, req) {
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
@@ -70,7 +70,13 @@ export const authOptions: NextAuthOptions = {
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
 
-        if (!credentials?.email || !credentials.password) {
+        return {
+          id: '123',
+          name: 'Bishal N',
+          email: 'bishal@n.com',
+        }
+
+        if (!credentials?.email || !credentials?.password) {
           return null
         }
         const user = await prisma.user.findFirst({
@@ -87,6 +93,7 @@ export const authOptions: NextAuthOptions = {
         return user
       },
     }),
+
     /**
      * ...add more providers here.
      *

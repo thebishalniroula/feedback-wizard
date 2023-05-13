@@ -1,3 +1,4 @@
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { api } from '~/utils/api'
@@ -8,7 +9,7 @@ const convertObjectToArray = (obj: Answers) => {
   const keys = Object.keys(obj)
   return keys.map((key) => ({ questionId: key, answer: obj[key] as string }))
 }
-const Form = () => {
+const Form: NextPage = () => {
   const router = useRouter()
   const { data: form, isLoading } = api.form.getById.useQuery(router.query.id as string)
   const { mutate, isLoading: isSubmitting } = api.submission.create.useMutation({

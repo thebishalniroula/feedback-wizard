@@ -30,7 +30,6 @@ specifiers:
   prisma: ^4.11.0
   react: 18.2.0
   react-dom: 18.2.0
-  react-hook-form: ^7.43.9
   superjson: 1.12.2
   tailwindcss: ^3.3.0
   typescript: ^5.0.2
@@ -52,7 +51,6 @@ dependencies:
   next-themes: 0.2.1_2xek2u27flvv5bywadnu4xxgx4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  react-hook-form: 7.43.9_react@18.2.0
   superjson: 1.12.2
   zod: 3.21.4
 
@@ -3687,15 +3685,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: false
-
-  /react-hook-form/7.43.9_react@18.2.0:
-    resolution: {integrity: sha512-AUDN3Pz2NSeoxQ7Hs6OhQhDr6gtF9YRuutGDwPQqhSUAHJSgGl2VeY3qN19MG0SucpjgDiuMJ4iC5T5uB+eaNQ==}
-    engines: {node: '>=12.22.0'}
-    peerDependencies:
-      react: ^16.8.0 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

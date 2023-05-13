@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '~/server/api/trpc'
 
 export const formRouter = createTRPCRouter({
-  create: publicProcedure
+  create: protectedProcedure
     .input(
       z.object({
         title: z.string(),
@@ -25,7 +25,7 @@ export const formRouter = createTRPCRouter({
           description,
           thumbnail,
           slug: title.replace(' ', '-'),
-          userId: 'clhhydxcn0002hplsl5uwxl45',
+          userId: ctx.auth.userId,
           questions: {
             createMany: {
               data: questionsData,
@@ -35,11 +35,11 @@ export const formRouter = createTRPCRouter({
       })
     }),
 
-  getAllByUser: publicProcedure.query(({ ctx, input }) => {
+  getAllByUser: protectedProcedure.query(({ ctx, input }) => {
     return ctx.prisma.form.findMany({
       where: {
         // TODO - replace with ctx.session.user.userId after implementing auth
-        userId: 'clhhydxcn0002hplsl5uwxl45',
+        userId: ctx.auth.userId,
       },
     })
   }),

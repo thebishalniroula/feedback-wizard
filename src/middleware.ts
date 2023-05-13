@@ -1,6 +1,7 @@
 import { withClerkMiddleware, getAuth } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { env } from './env.mjs'
 
 // Set the paths that don't require the user to be signed in
 const publicPaths = ['/', '/auth/(.*)', '/form/(.*)']
@@ -19,7 +20,7 @@ export default withClerkMiddleware((request: NextRequest) => {
   if (!userId) {
     // redirect the users to /pages/sign-in/[[...index]].ts
 
-    const signInUrl = new URL('/sign-in', request.url)
+    const signInUrl = new URL('/auth/signin', request.url)
     signInUrl.searchParams.set('redirect_url', request.url)
     return NextResponse.redirect(signInUrl)
   }

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '~/server/api/trpc'
 
 export const submissionRouter = createTRPCRouter({
   create: publicProcedure
@@ -21,4 +21,37 @@ export const submissionRouter = createTRPCRouter({
         },
       })
     }),
+  getByFormId: protectedProcedure.input(z.object({ formId: z.string() })).query(async ({ ctx, input }) => {
+    const formsByThatUser = await ctx.prisma.form.findMany({
+      where: {
+        userId: ctx.auth.userId,
+      },
+      select: {
+        id: true,
+      },
+    })
+    console.log(formsByThatUser)
+    console.log(input.formId)
+
+    let isUserAuthorized = false
+    for (const form of formsByThatUser) {
+      if (form.id === input.formId) {
+        isUserAuthorized = true
+        break
+      }
+    }
+    if (!isUserAuthorized) return null
+    return ctx.prisma.submission.findMany({
+      where: {
+        formId: input.formId,
+      },
+      include: {
+        answers: {
+          include: {
+            question: true,
+          },
+        },
+      },
+    })
+  }),
 })

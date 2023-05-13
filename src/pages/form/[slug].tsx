@@ -11,7 +11,8 @@ const convertObjectToArray = (obj: Answers) => {
 }
 const Form: NextPage = () => {
   const router = useRouter()
-  const { data: form, isLoading } = api.form.getById.useQuery(router.query.id as string)
+  console.log(router.query)
+  const { data: form, isLoading } = api.form.getOne.useQuery(router.query.slug as string, { enabled: router.isReady })
   const { mutate, isLoading: isSubmitting } = api.submission.create.useMutation({
     onSuccess: () => {
       router.replace('/form/success')

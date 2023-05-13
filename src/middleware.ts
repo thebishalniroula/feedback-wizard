@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
 import { env } from './env.mjs'
 
 // Set the paths that don't require the user to be signed in
-const publicPaths = ['/', '/auth/(.*)', '/form/(.*)']
+const publicPaths = ['/', '/auth/(.*)', '/form/(.*)', '/api/(.*)']
 
 const isPublic = (path: string) => {
   return publicPaths.find((x) => path.match(new RegExp(`^${x}$`.replace('*$', '($|/)'))))

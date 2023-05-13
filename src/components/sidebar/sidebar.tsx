@@ -64,12 +64,17 @@ export const SidebarWrapper = () => {
         </Sidebar.Header>
         <Flex direction={'column'} justify={'between'} css={{ height: '100%' }}>
           <Sidebar.Body className='body sidebar' style={{ gap: '0.25rem' }}>
-            <SidebarItem title='Home' icon={<HomeIcon />} isActive={router.pathname === '/'} href='/' />
             <SidebarItem
-              isActive={router.pathname === '/accounts'}
+              title='Dashboard'
+              icon={<HomeIcon />}
+              isActive={router.pathname === '/dashboard'}
+              href='/dashboard'
+            />
+            <SidebarItem
+              isActive={router.pathname.startsWith('/dashboard/form')}
               title='Forms'
               icon={<AccountsIcon />}
-              href='/form'
+              href='/dashboard/form'
             />
           </Sidebar.Body>
           <Sidebar.Footer>

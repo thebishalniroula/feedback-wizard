@@ -7,9 +7,8 @@ import { createTheme } from '@nextui-org/react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { Layout } from '../components/layout/layout'
 import { ClerkProvider } from '@clerk/nextjs'
-import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-
+import { dark } from '@clerk/themes'
 const lightTheme = createTheme({
   type: 'light',
   theme: {
@@ -43,7 +42,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
       }}
     >
       {/* <NextUIProvider> */}
-      <ClerkProvider {...pageProps}>
+      <ClerkProvider {...pageProps} appearance={{ baseTheme: dark }}>
         {!_hasLayout && <Component {...pageProps} />}
         {_hasLayout && (
           <Layout>

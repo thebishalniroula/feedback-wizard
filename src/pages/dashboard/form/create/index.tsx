@@ -32,7 +32,7 @@ const MultiStepForm = () => {
   const router = useRouter()
   const { mutate, isLoading } = api.form.create.useMutation({
     onSuccess: () => {
-      router.replace('/dashboard/form/create/success')
+      router.replace('/dashboard/form')
     },
   })
   const handleSubmit = () => {

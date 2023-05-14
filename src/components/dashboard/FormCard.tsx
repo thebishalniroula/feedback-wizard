@@ -13,7 +13,7 @@ const Card = ({ id, title, image, description, slug }: CardProps) => {
   return (
     <Link
       href={`/dashboard/form/edit/${slug}`}
-      className='flex flex-col gap-2 bg-gray-600 rounded-md w-48 h-44 overflow-hidden cursor-pointer'
+      className='flex flex-col gap-2 bg-[#302c2c] rounded-md w-48 h-44 overflow-hidden cursor-pointer'
     >
       <Image
         height={200}

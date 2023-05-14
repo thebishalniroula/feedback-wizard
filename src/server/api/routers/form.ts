@@ -84,21 +84,22 @@ export const formRouter = createTRPCRouter({
         title: z.string().optional(),
         description: z.string().optional(),
         thumbnail: z.string().optional(),
-        questions: z.array(z.string()).optional(),
+        questions: z.array(z.object({ questionId: z.string(), question: z.string() })).optional(),
       })
     )
     .mutation(({ ctx, input }) => {
       const { formId, title, questions, description, thumbnail } = input
+      const questionsUpdatePromised = questions?.map((question) => {
+        return ctx.prisma.question.update({
+          where: { id: question.questionId },
+          data: { question: question.question },
+        })
+      })
+      if (questionsUpdatePromised) Promise.all(questionsUpdatePromised)
       return ctx.prisma.form.update({
         where: { id: formId },
         data: {
           title,
-          //Todo - implement updating multiple questions concurrently
-          // questions:{
-          //   updateMany:{
-
-          //   }
-          // },
           description,
           thumbnail,
         },

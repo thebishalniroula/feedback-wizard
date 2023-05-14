@@ -9,7 +9,7 @@ const Index: NextPageWithLayout = () => {
   if (isLoading) {
     return (
       <>
-        <h1 className='p-5 text-2xl font-semibold'>Your forms</h1>
+        <h1 className='p-5 text-2xl font-semibold border-b border-opacity-20 border-b-white'>Your forms</h1>
         <div className='h-1/2 w-full flex justify-center items-center'>
           <Loading />
         </div>
@@ -18,8 +18,8 @@ const Index: NextPageWithLayout = () => {
   }
   return (
     <>
-      <h1 className='p-5 text-2xl font-semibold'>Your forms</h1>
-      <div className='flex flex-wrap gap-4 p-5'>
+      <h1 className='p-5 text-2xl font-semibold border-b border-opacity-20 border-b-white'>Your forms</h1>
+      <div className='flex flex-wrap gap-4 p-5 mt-10'>
         {forms?.map((form) => (
           <Card
             key={form.id}

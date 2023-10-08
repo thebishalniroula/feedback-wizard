@@ -4,6 +4,7 @@ import LastCard from '~/components/dashboard/NewFormCard'
 import Loading from '~/components/ui/Loading'
 import { NextPageWithLayout } from '~/pages/_app'
 import { api } from '~/utils/api'
+
 const Index: NextPageWithLayout = () => {
   const { data: forms, isLoading } = api.form.getAllByUser.useQuery()
   if (isLoading) {

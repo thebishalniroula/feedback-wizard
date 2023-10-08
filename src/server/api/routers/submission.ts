@@ -30,8 +30,6 @@ export const submissionRouter = createTRPCRouter({
         id: true,
       },
     })
-    console.log(formsByThatUser)
-    console.log(input.formId)
 
     let isUserAuthorized = false
     for (const form of formsByThatUser) {

@@ -52,6 +52,9 @@ dependencies:
   superjson:
     specifier: 1.12.2
     version: 1.12.2
+  uploadthing:
+    specifier: ^3.0.5
+    version: 3.0.5
   zod:
     specifier: ^3.21.4
     version: 3.21.4
@@ -4298,6 +4301,10 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
     dev: true
+
+  /uploadthing@3.0.5:
+    resolution: {integrity: sha512-/AHyRKp6nnI0DLbjBeKf/JYqQNW6qIYVVBiVyDQewlJk+NtP5R7ux8aPGNrgdZOonXWrM3pDYaY7+FtplQ7sPA==}
+    dev: false
 
   /uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}

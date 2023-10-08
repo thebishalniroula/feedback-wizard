@@ -38,7 +38,7 @@ const Form: NextPage = () => {
           alt=''
         />
         <h1 className='my-5 text-center text-3xl font-semibold text-gray-200'>{form?.title}</h1>
-        <p className='mx-auto mb-7 max-w-[80%] text-xl text-gray-300'>{form?.description}</p>
+        <p className='mx-auto mb-7 max-w-[80%] text-lg text-center text-gray-300'>{form?.description}</p>
         <div className='mx-auto flex max-w-[80%] flex-col gap-6'>
           {form?.questions.map((question) => (
             <div className='flex flex-col gap-2' key={question.id}>

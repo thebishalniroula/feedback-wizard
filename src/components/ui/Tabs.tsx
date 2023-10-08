@@ -10,14 +10,16 @@ export default function Tabs({ tabs }: { tabs: TabsPropsType }) {
 
   return (
     <div>
-      <div className='flex border-b justify-center gap-20 bg-[#242424c3] w-[80%] mx-auto mb-8 rounded-sm'>
+      <div className='flex border-b gap-4 bg-[#242424c3] w-[80%] mx-auto mb-8 rounded-sm'>
         {/* Loop through tab data and render button for each. */}
         {tabs.map((tab, idx) => {
           return (
             <button
               key={idx}
-              className={`py-2 border-b-4 transition-colors duration-300 text-lg ${
-                idx === activeTabIndex ? 'border-slate-200' : 'border-transparent hover:border-gray-200'
+              className={`py-2 border-b-4 transition-colors duration-300 text-md px-5 text-gray-800 flex justify-center items-center  ${
+                idx === activeTabIndex
+                  ? 'border-slate-200 bg-slate-100'
+                  : 'border-transparent hover:border-gray-200 bg-slate-500'
               }`}
               // Change the active tab on click.
               onClick={() => setActiveTabIndex(idx)}

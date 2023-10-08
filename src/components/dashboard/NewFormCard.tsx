@@ -5,7 +5,7 @@ const Card = () => {
   return (
     <Link
       href='/dashboard/form/create'
-      className='w-48 h-44 bg-gray-600 text-slate-300 flex flex-col items-center justify-center rounded-md'
+      className='flex justify-center items-center gap-2 bg-[#302c2c] rounded-md h-50 w-52 overflow-hidden cursor-pointer'
     >
       <div>
         <svg

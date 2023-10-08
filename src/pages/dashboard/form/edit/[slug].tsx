@@ -6,6 +6,7 @@ import { NextPageWithLayout } from '~/pages/_app'
 import { api } from '~/utils/api'
 import Loading from '~/components/ui/Loading'
 import { Question, type Form, Submission } from '~/server/db'
+import Link from 'next/link'
 
 type QuestionsStateType = {
   [questionId: string]: string
@@ -20,6 +21,7 @@ const convertObjectToArray = (obj: QuestionsStateType | undefined) => {
 
 const Form: NextPageWithLayout = () => {
   const router = useRouter()
+
   const { slug } = router.query
   if (!slug) return null
   if (Array.isArray(slug)) return null
@@ -48,7 +50,7 @@ const Form: NextPageWithLayout = () => {
     },
   ]
   return (
-    <>
+    <div className=''>
       <div className='relative w-full h-52'>
         <Image
           src={
@@ -60,10 +62,11 @@ const Form: NextPageWithLayout = () => {
           alt={form.title}
         />
       </div>
+
       <h1 className='text-center text-3xl mt-4 mb-3'>{form.title}</h1>
-      <p className='text-center text-slate-200 mb-4'>{form.description}</p>
+      <p className='text-center text-slate-200 mb-6'>{form.description}</p>
       <Tabs tabs={tabsData} />
-    </>
+    </div>
   )
 }
 Form.hasLayout = true
